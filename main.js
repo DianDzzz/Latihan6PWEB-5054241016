@@ -37,7 +37,7 @@ const dataWilayah = {
 			"Wonokromo": "60243",
 			"Suko Manunggal": "60186",
 			"Genteng": "60271",
-			"Bubutan": "60178"
+			"Sukolilo": "60111"
 		},
 		"Sidoarjo": {
 			"Gedangan": "61254",
