@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Sistem Registrasi & Pencarian Kode Pos</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+	<!-- Halaman Registrasi -->
+	<div id="registrationPage" class="page">
+		<div class="topbar">
+			<header class="header">Sistem Registrasi Mahasiswa & Pencarian Kode Pos</header>
+		</div>
+
+		<div class="container">
+			<div class="form-section">
+				<h1>Formulir Registrasi</h1>
+				<p class="subtitle">Silakan isi data pribadi Anda untuk melanjutkan</p>
+
+				<form id="registrationForm" class="form-group">
+					<!-- Nama Mahasiswa dengan Autocomplete -->
+					<div class="form-field">
+						<label for="namaMahasiswa">Nama Mahasiswa *</label>
+						<input 
+							type="text" 
+							id="namaMahasiswa" 
+							placeholder="Ketik nama Anda (contoh: Muhammad, Ahmad, Siti...)"
+							class="input-field"
+							required
+							autocomplete="off"
+						>
+						<div id="namaSuggestions" class="autocomplete-suggestions"></div>
+						<span class="error-message" id="namaError"></span>
+					</div>
+
+					<!-- NIM -->
+					<div class="form-field">
+						<label for="nim">NIM (Nomor Induk Mahasiswa) *</label>
+						<input 
+							type="text" 
+							id="nim" 
+							placeholder="Contoh: 5054241016"
+							class="input-field"
+							required
+						>
+						<span class="error-message" id="nimError"></span>
+					</div>
+
+					<!-- Mata Kuliah -->
+					<div class="form-field">
+						<label for="mataKuliah">Mata Kuliah *</label>
+						<select id="mataKuliah" class="input-field select-field" required>
+							<option value="">-- Pilih Mata Kuliah --</option>
+							<option value="Pemrograman Web">Pemrograman Web</option>
+							<option value="Basis Data">Basis Data</option>
+							<option value="Struktur Data">Struktur Data</option>
+							<option value="Algoritma">Algoritma</option>
+							<option value="Keamanan Siber">Keamanan Siber</option>
+						</select>
+						<span class="error-message" id="mataKuliahError"></span>
+					</div>
+
+					<!-- Dosen -->
+					<div class="form-field">
+						<label for="dosen">Dosen *</label>
+						<select id="dosen" class="input-field select-field" required>
+							<option value="">-- Pilih Dosen --</option>
+							<option value="Dr. Ir. Supratman Andi Agtianto">Dr. Ir. Supratman Andi Agtianto</option>
+							<option value="Dr. Eng. Ramaditya Wicaksana">Dr. Eng. Ramaditya Wicaksana</option>
+							<option value="Dr. Henning Titi Ciptaningtyas">Dr. Henning Titi Ciptaningtyas</option>
+							<option value="Prof. Dr. Suwardi MS">Prof. Dr. Suwardi MS</option>
+						</select>
+						<span class="error-message" id="dosenError"></span>
+					</div>
+
+					<div class="button-group">
+						<button type="submit" class="btn btn-primary">Daftar & Masuk</button>
+						<button type="reset" class="btn btn-secondary">Reset</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Halaman Dashboard/Homepage -->
+	<div id="dashboardPage" class="page hidden">
+		<div class="topbar">
+			<header class="header">
+				<div class="header-content">
+					<div>Dashboard Pencarian Kode Pos</div>
+					<button id="logoutBtn" class="btn-logout">Logout</button>
+				</div>
+			</header>
+		</div>
+
+		<div class="container">
+			<!-- Info Pengguna -->
+			<div class="user-info">
+				<p>Selamat datang, <span id="userNameDisplay" class="user-name"></span> (NIM: <span id="userNimDisplay"></span>)</p>
+				<p>Mata Kuliah: <span id="userMataKuliahDisplay"></span> | Dosen: <span id="userDosenDisplay"></span></p>
+			</div>
+
+			<!-- Form Pencarian Kode Pos -->
+			<div class="search-section">
+				<h2>Cari Kode Pos Daerah</h2>
+				<p class="subtitle">Pilih Provinsi, Kota/Kabupaten, dan Kecamatan untuk menemukan kode pos</p>
+
+				<div class="form-group search-form">
+					<!-- Dropdown Provinsi -->
+					<div class="form-field dropdown-field">
+						<label for="provinsi">Provinsi *</label>
+						<select id="provinsi" class="input-field select-field" required>
+							<option value="">-- Pilih Provinsi --</option>
+						</select>
+						<span class="error-message" id="provinsiError"></span>
+					</div>
+
+					<!-- Dropdown Kota/Kabupaten (dinamis berdasarkan provinsi) -->
+					<div class="form-field dropdown-field">
+						<label for="kota">Kota/Kabupaten *</label>
+						<select id="kota" class="input-field select-field" required disabled>
+							<option value="">-- Pilih Kota/Kabupaten --</option>
+						</select>
+						<span class="error-message" id="kotaError"></span>
+					</div>
+
+					<!-- Dropdown Kecamatan (dinamis berdasarkan kota) -->
+					<div class="form-field dropdown-field">
+						<label for="kecamatan">Kecamatan *</label>
+						<select id="kecamatan" class="input-field select-field" required disabled>
+							<option value="">-- Pilih Kecamatan --</option>
+						</select>
+						<span class="error-message" id="kecamatanError"></span>
+					</div>
+
+					<div class="button-group">
+						<button id="cariBtn" type="button" class="btn btn-primary">Cari Kode Pos</button>
+						<button id="resetSearchBtn" type="button" class="btn btn-secondary">Reset</button>
+					</div>
+				</div>
+
+				<!-- Hasil Pencarian -->
+				<div id="searchResultContainer" class="hidden">
+					<div id="searchResult" class="result-section">
+						<!-- Hasil akan ditampilkan di sini -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="main.js"></script>
+</body>
+</html>
