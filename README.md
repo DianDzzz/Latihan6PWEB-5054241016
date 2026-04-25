@@ -112,7 +112,7 @@ Sistem dropdown dinamis diimplementasikan dengan:
 
 Muhammad Hadidan Nurhaunan (5054241016)
 Mata Kuliah: Pemrograman Web
-Dosen: Dr. Ir. Supratman Andi Agtianto
+Dosen: Fajar Baskoro
 
 ## Lisensi
 
